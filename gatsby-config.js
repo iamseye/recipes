@@ -4,11 +4,15 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
-    title: 'Simply Recipes',
-    description: 'This is a simple recipes website',
-    author: 'Jessie'
+    title: "Simply Recipes",
+    description: "This is a simple recipes website",
+    author: "Jessie",
   },
   /* Your site config here */
   plugins: [
@@ -22,6 +26,13 @@ module.exports = {
         name: `images`,
         path: `${__dirname}/src/assets/images`,
       },
-    }
+    },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `i1tj9m7mvf8v`,
+        accessToken: process.env.CONTENTFUL_API_KEY,
+      },
+    },
   ],
 }
